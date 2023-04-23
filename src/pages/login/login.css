@@ -1,6 +1,54 @@
+
 .lcontainer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 680px;
+    
+    background-color: rgb(219, 214, 214);
+    
+}
+
+.infocontainer{
+    margin: 10px;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    
+    
+}
+.btn{
+    border-radius: 5px;
+    border-style: hidden;
+    width: 100px;
+    height: 30px;
+    cursor: pointer;
+    
+}
+.btn:hover{
+    background-color: green;
+    color: white;
+    border-style: hidden;
+    transition: 0.5s;
+}
+
+.linput{
+    border-radius: 5px;
+
+    border-style: hidden;
+    margin: 7px;
+    height: 30px;
+    border-bottom: 1px solid gray ;
+}
+.login{
+    margin-top: 120px;
+    background-color: rgb(24, 147, 116);
+    border-radius: 5px;   
+    height: 50vh;
+    width: 50vw;
+    display: flex;
+    flex-direction: column;
+    border: 1px gray solid;
+    justify-content: center;
 }
