@@ -11,8 +11,10 @@ import {
   faCircleXmark,
   faLocationDot,
 } from "@fortawesome/free-solid-svg-icons";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import useFetch from "../../Hooks/useFetch";
+import IsLoading from "../../components/spinner/isloading";
+import { searchContext } from "../../context/searchContext";
 
 const Hotel = () => {
   const id = useLocation().pathname.split("/")[2]
@@ -20,7 +22,17 @@ const Hotel = () => {
   const [slideNumber, setSlideNumber] = useState(0);
   const [open, setOpen] = useState(false);
   const {data,loading,} = useFetch(`//localhost:5000/hotels/find/${id}`)
-  console.log(data?.photos?.length)
+
+  const {dates} = useContext(searchContext);
+
+  const MILLISECONT_PERDAY = 1000*60*60*24;
+  const daysDiffrences =  (date1,date2)=>{
+    const timeDif = Math.abs(date2?.getTime() - date1?.getTime())
+    const diffDay = Math.ceil(timeDif/MILLISECONT_PERDAY);
+    return diffDay
+  }
+  console.log(dates)
+  
   const photos = [
     {
       src: "https://cf.bstatic.com/xdata/images/hotel/max1280x900/261707778.jpg?k=56ba0babbcbbfeb3d3e911728831dcbc390ed2cb16c51d88159f82bf751d04c6&o=&hp=1",
@@ -101,7 +113,7 @@ const Hotel = () => {
             Book a stay over $114 at this property and get a free airport taxi
           </span>
           <div className="hotelImages">
-            {data?.photos?.map((item,i) => (
+            {loading?<div className="loading-container"><IsLoading></IsLoading></div>:data?.photos?.map((item,i) => (
               <div className="hotelImgWrapper" key={i}>
                 <img
                   onClick={() => handleOpen(i)}
@@ -130,13 +142,13 @@ const Hotel = () => {
               </p>
             </div>
             <div className="hotelDetailsPrice">
-              <h1>Perfect for a 9-night stay!</h1>
+              <h1>{dates.length?`Perfect for a ${daysDiffrences(dates[0]?.endDate,dates[0]?.startDate)}-night stay!`:"Please select dayes"}</h1>
               <span>
                 Located in the real heart of Krakow, this property has an
                 excellent location score of 9.8!
               </span>
               <h2>
-                <b>$945</b> (9 nights)
+                <b>${dates.length?data?.cheapestPrice * daysDiffrences(dates[0]?.endDate,dates[0]?.startDate):0}</b> ({dates.length?daysDiffrences(dates[0]?.endDate,dates[0]?.startDate):0} nights)
               </h2>
               <button>Reserve or Book Now!</button>
             </div>

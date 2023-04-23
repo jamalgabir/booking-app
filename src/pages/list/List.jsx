@@ -2,21 +2,20 @@ import "./list.css";
 import Navbar from "../../components/navbar/Navbar";
 import Header from "../../components/header/Header";
 import { useLocation } from "react-router-dom";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { format } from "date-fns";
 import { DateRange } from "react-date-range";
 import SearchItem from "../../components/searchItem/SearchItem";
 import useFetch from "../../Hooks/useFetch";
 import IsLoading from "../../components/spinner/isloading";
-import axios from "axios";
-
+import { searchContext } from "../../context/searchContext";
 
 const List = () => {
 
   const location = useLocation();
 
   const [destination, setDestination] = useState(location.state.destination);
-  const [date, setDate] = useState(location.state.date);
+  const [date, setDate] = useState(location.state.dates);
   const [openDate, setOpenDate] = useState(false);
   const [options, setOptions] = useState(location.state.options);
   const [min,setMin] = useState(1)
@@ -24,10 +23,10 @@ const List = () => {
   // const [data,setData] = useState([DADA?.data])
   // const [loading,setLoading] = useState(DADA?.loading)
   const {data,loading,refetch} = useFetch(`//localhost:5000/hotels?cities=${destination}&featured=true&min=${min}&max=${max}`)
-
+  const {dispatch} = useContext(searchContext)
  
   const HandleSearch =()=>{
-    
+    dispatch({type:"NEW_SEARCH",payload:{destination,options,dates:date}})
     refetch()
       
   }

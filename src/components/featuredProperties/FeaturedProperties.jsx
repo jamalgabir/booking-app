@@ -5,6 +5,7 @@ import IsLoading from "../spinner/isloading";
 const FeaturedProperties = () => {
   
   const {data,loading} = useFetch("http://localhost:5000/hotels?featured=true&limit=4");
+  console.log(data)
   return (
     <div className="fp">
       {loading?<div className="loading-container"><IsLoading/></div>:<>{data&&data.map((img)=>(
