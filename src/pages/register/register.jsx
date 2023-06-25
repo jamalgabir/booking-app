@@ -13,6 +13,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import axios from 'axios';
 import { useNavigate,Link} from 'react-router-dom';
+import Alert from '@mui/material/Alert';
+
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
@@ -52,7 +54,8 @@ export default function SignUp() {
     username: undefined,
     email: undefined,
     password: undefined
-  })
+  });
+  const [alert,setAlert] = useState();
   const classes = useStyles();
  const navigate = useNavigate();
   const handleChange = (e) =>{
@@ -67,6 +70,7 @@ export default function SignUp() {
         localStorage.setItem("user",JSON.stringify(res.data._id))
         navigate("/")
     }catch(error){
+        setAlert(error.response.data.message)
         console.log(error)
     }
   }
@@ -129,6 +133,9 @@ export default function SignUp() {
               />
             </Grid>
           </Grid>
+          {alert&&<Alert variant="outlined" severity="warning">
+        {alert}
+      </Alert>}
           <Button
           onClick={(e)=>handleclick(e)}
             type="submit"

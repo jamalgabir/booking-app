@@ -17,6 +17,7 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import { useNavigate } from 'react-router-dom';
+import Alert from '@mui/material/Alert';
 
 
 function Copyright() {
@@ -60,17 +61,18 @@ const Login = () => {
         email:undefined,
         password:undefined,
     });
-   const {user,dispatch} = useContext(AuthContext);
+    const [alert,setAlert] = useState();
+   const {dispatch} = useContext(AuthContext);
 
    const classes = useStyles();
 
-   
 
    const handleChange = (e)=>{
     setCrededtials(prev=>({...prev,[e.target.name]: e.target.value}));
     
 };
-   console.log(credentials)
+  
+   
    const handleClick =async (e)=>{
     e.preventDefault()
     
@@ -82,11 +84,13 @@ const Login = () => {
         
 
     }catch(error){
+      setAlert(error.response.data.message)
+      console.log(error)
         dispatch({type:"LOGIN_FAILURE",payload:error.response.data})
     }
     
    }
-   console.log(user)
+   
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -126,11 +130,13 @@ const Login = () => {
             control={<Checkbox value="remember" color="primary" />}
             label="Remember me"
           />
+          {alert&&<Alert variant="outlined" severity="warning">
+                  {alert}
+          </Alert>}
           <Button
             type="submit"
             fullWidth
             variant="contained"
-            
             color="primary"
             className={classes.submit}
             onClick={handleClick}
