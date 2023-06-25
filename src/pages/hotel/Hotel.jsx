@@ -15,23 +15,24 @@ import { useContext, useState } from "react";
 import useFetch from "../../Hooks/useFetch";
 import IsLoading from "../../components/spinner/isloading";
 import { searchContext } from "../../context/searchContext";
-
+import { AuthContext } from "../../context/auothContext";
+import { useNavigate } from "react-router-dom";
 const Hotel = () => {
   const id = useLocation().pathname.split("/")[2]
-  
+  const navigate = useNavigate();
   const [slideNumber, setSlideNumber] = useState(0);
   const [open, setOpen] = useState(false);
   const {data,loading,} = useFetch(`//localhost:5000/hotels/find/${id}`)
 
-  const {dates} = useContext(searchContext);
-
+  const {dates,options} = useContext(searchContext);
+  const {user } = useContext(AuthContext);
   const MILLISECONT_PERDAY = 1000*60*60*24;
   const daysDiffrences =  (date1,date2)=>{
     const timeDif = Math.abs(date2?.getTime() - date1?.getTime())
     const diffDay = Math.ceil(timeDif/MILLISECONT_PERDAY);
     return diffDay
   }
-  console.log(dates)
+ 
   
   const photos = [
     {
@@ -53,7 +54,6 @@ const Hotel = () => {
       src: "https://cf.bstatic.com/xdata/images/hotel/max1280x900/261707389.jpg?k=52156673f9eb6d5d99d3eed9386491a0465ce6f3b995f005ac71abc192dd5827&o=&hp=1",
     },
   ];
-  
 
   const handleOpen = (i) => {
     setSlideNumber(i);
@@ -61,17 +61,21 @@ const Hotel = () => {
   };
 
   const handleMove = (direction) => {
-    let newSlideNumber;
-
-    if (direction === "l") {
-      newSlideNumber = slideNumber === 0 ? data?.photos?.length : slideNumber - 1;
+    let newSlideNumber ;
+    
+    if (direction === "0") {
+      newSlideNumber = slideNumber === 0 ? photos?.length-1 : slideNumber - 1;
     } else {
-      newSlideNumber = slideNumber === data?.photos?.length ? 0 : slideNumber + 1;
+      newSlideNumber = slideNumber === photos?.length-1 ? 0 : slideNumber + 1;
     }
 
     setSlideNumber(newSlideNumber)
   };
-
+  const handleClick = () =>{
+     if(!user){
+      navigate("/login")
+     }
+  }
   return (
     <div>
       <Navbar />
@@ -87,15 +91,15 @@ const Hotel = () => {
             <FontAwesomeIcon
               icon={faCircleArrowLeft}
               className="arrow"
-              onClick={() => handleMove("l")}
+              onClick={() => handleMove(photos.length)}
             />
             <div className="sliderWrapper">
-              <img src={data?.photos[slideNumber]} alt="" className="sliderImg" />
+              <img src={photos[slideNumber]?.src} alt="" className="sliderImg" />
             </div>
             <FontAwesomeIcon
               icon={faCircleArrowRight}
               className="arrow"
-              onClick={() => handleMove("r")}
+              onClick={() => handleMove(photos.length)}
             />
           </div>
         )}
@@ -113,12 +117,12 @@ const Hotel = () => {
             Book a stay over $114 at this property and get a free airport taxi
           </span>
           <div className="hotelImages">
-            {loading?<div className="loading-container"><IsLoading></IsLoading></div>:data?.photos?.map((item,i) => (
+            {loading?<div className="loading-container"><IsLoading/></div>:photos?.map((item,i) => (
               <div className="hotelImgWrapper" key={i}>
                 <img
                   onClick={() => handleOpen(i)}
-                  src={item}
-                  alt=""
+                  src={item.src}
+                  alt="hotel"
                   className="hotelImg"
                 />
               </div>
@@ -148,9 +152,9 @@ const Hotel = () => {
                 excellent location score of 9.8!
               </span>
               <h2>
-                <b>${dates.length?data?.cheapestPrice * daysDiffrences(dates[0]?.endDate,dates[0]?.startDate):0}</b> ({dates.length?daysDiffrences(dates[0]?.endDate,dates[0]?.startDate):0} nights)
+                <b>${dates.length?data?.cheapestPrice * daysDiffrences(dates[0]?.endDate,dates[0]?.startDate)*options?.room:0}</b> {options?.room} Rooms and ({dates.length?daysDiffrences(dates[0]?.endDate,dates[0]?.startDate):0} nights )
               </h2>
-              <button>Reserve or Book Now!</button>
+              <button onClick={handleClick()}>Reserve or Book Now!</button>
             </div>
           </div>
         </div>

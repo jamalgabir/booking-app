@@ -1,20 +1,31 @@
 import "./navbar.css"
-import {Link}from "react-router-dom"
+import {Link}from "react-router-dom";
+import { useContext } from "react";
+import { AuthContext } from "../../context/auothContext";
+
 const Navbar = () => {
+  const {user,dispatch} = useContext(AuthContext)
+  
+  const logout = ()=>{
+    localStorage.clear();
+    dispatch({type:"LOG_OUT"})
+  }
   return (
     <div className="navbar">
       <div className="navContainer">
         <Link style={{textDecoration:"none",color:"inherit"}} to="/">
-        <span className="logo">J.booking</span>
+        <span className="logo">jamalDev</span>
         </Link>
         
         <div className="navItems">
-          <Link style={{textDecoration:"none",color:"inherit"}} to="/register">
-          <button className="navButton">Register</button>
+          {!user?<><Link to="/register">
+            <button className="navButton">Register</button>
           </Link>
-          <Link style={{textDecoration:"none",color:"inherit"}} to="/login">
+          <Link to="/login">
           <button className="navButton">Login</button>
-          </Link>
+
+          
+          </Link></>:<button onClick={()=>logout()} className="navButton">Logout</button>}
         </div>
       </div>
     </div>

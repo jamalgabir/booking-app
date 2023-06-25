@@ -25,12 +25,18 @@ const List = () => {
   const {data,loading,refetch} = useFetch(`//localhost:5000/hotels?cities=${destination}&featured=true&min=${min}&max=${max}`)
   const {dispatch} = useContext(searchContext)
  
+
+  const handleChange = (e) =>{
+    setOptions(prev=>({...prev,[e.target.name]: e.target.value}));
+  }
   const HandleSearch =()=>{
+
     dispatch({type:"NEW_SEARCH",payload:{destination,options,dates:date}})
     refetch()
       
   }
-
+  console.log(options)
+ 
   return (
     <div>
       <Navbar />
@@ -75,6 +81,8 @@ const List = () => {
                 <div className="lsOptionItem">
                   <span className="lsOptionText">Adult</span>
                   <input
+                  onChange={(e)=>handleChange(e)}
+                    name="adult"
                     type="number"
                     min={1}
                     className="lsOptionInput"
@@ -84,6 +92,8 @@ const List = () => {
                 <div className="lsOptionItem">
                   <span className="lsOptionText">Children</span>
                   <input
+                  onChange={(e)=>handleChange(e)}
+                  name="children"
                     type="number"
                     min={0}
                     className="lsOptionInput"
@@ -93,6 +103,8 @@ const List = () => {
                 <div className="lsOptionItem">
                   <span className="lsOptionText">Room</span>
                   <input
+                  onChange={(e)=>handleChange(e)}
+                  name="room"
                     type="number"
                     min={1}
                     className="lsOptionInput"

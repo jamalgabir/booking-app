@@ -15,7 +15,8 @@ const AuthReducer = (state,action)=>{
                 loading:true,
                 error:null
             };
-        case "LOGIN_SUCCESSFULLY":
+            
+        case "LOGIN_SUCCESS":
             return {
                 user:action.payload,
                 loading:false,
@@ -27,11 +28,11 @@ const AuthReducer = (state,action)=>{
                 loading:false,
                 error:action.payload
             };
-        case "LOG_OUT_START":
+        case "LOG_OUT":
             return {
                 user:null,
                 loading:false,
-                errror:null
+                error:null,
             };
         default:
             return state;
@@ -48,9 +49,9 @@ export const AuthContextProvider = ({children}) =>{
 
     return(
         <AuthContext.Provider value={{
-            city:state.city,
-            options:state.options,
-            dates:state.dates
+            user:state.user,
+            loading:state.loading,
+            error:state.error
             ,dispatch}}>
             {children}
         </AuthContext.Provider>
