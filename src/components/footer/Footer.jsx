@@ -44,7 +44,7 @@ const Footer = () => {
           <li className="fListItem">Terms & conditions</li>
         </ul>
       </div>
-      <div className="fText">Copyright © 2023 Jamaldev.</div>
+      <div className="fText">Copyright © {new Date().getFullYear()} Jamaldev.</div>
     </div>
   );
 };
