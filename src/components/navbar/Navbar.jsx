@@ -10,6 +10,8 @@ const Navbar = () => {
     localStorage.clear();
     dispatch({type:"LOG_OUT"})
   }
+
+
   return (
     <div className="navbar">
       <div className="navContainer">

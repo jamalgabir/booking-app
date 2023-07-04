@@ -17,6 +17,7 @@ import IsLoading from "../../components/spinner/isloading";
 import { searchContext } from "../../context/searchContext";
 import { AuthContext } from "../../context/auothContext";
 import { useNavigate } from "react-router-dom";
+
 const Hotel = () => {
   const id = useLocation().pathname.split("/")[2]
   const navigate = useNavigate();
@@ -71,10 +72,11 @@ const Hotel = () => {
 
     setSlideNumber(newSlideNumber)
   };
-  const handleClick = () =>{
-     if(!user){
-      navigate("/login")
-     }
+  const HandleClick = () =>{
+    
+    if(!user){
+     return navigate("/login")
+    }
   }
   return (
     <div>
@@ -104,7 +106,7 @@ const Hotel = () => {
           </div>
         )}
         <div className="hotelWrapper">
-          <button className="bookNow">Reserve or Book Now!</button>
+          <button onClick={()=>HandleClick()} className="bookNow">Reserve or Book Now!</button>
           <h1 className="hotelTitle">Tower Street Apartments</h1>
           <div className="hotelAddress">
             <FontAwesomeIcon icon={faLocationDot} />
@@ -154,7 +156,7 @@ const Hotel = () => {
               <h2>
                 <b>${dates.length?data?.cheapestPrice * daysDiffrences(dates[0]?.endDate,dates[0]?.startDate)*options?.room:0}</b> {options?.room} Rooms for ({dates.length?daysDiffrences(dates[0]?.endDate,dates[0]?.startDate):0} nights )
               </h2>
-              <button onClick={handleClick()}>Reserve or Book Now!</button>
+              <button onClick={()=>HandleClick()}>Reserve or Book Now!</button>
             </div>
           </div>
         </div>

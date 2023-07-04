@@ -3,7 +3,7 @@ import axios from 'axios';
 import  { useContext, useState } from 'react';
 import { AuthContext } from '../../context/auothContext';
 import "./login.css";
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -18,8 +18,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import { useNavigate } from 'react-router-dom';
 import Alert from '@mui/material/Alert';
-import Backdrop from '@mui/material/Backdrop';
-import CircularProgress from '@mui/material/CircularProgress';
+
 
 
 function Copyright() {
@@ -57,7 +56,6 @@ function Copyright() {
 
 const Login = () => {
     
-    
     const navigate = useNavigate();
     const [credentials, setCrededtials] = useState({
         email:undefined,
@@ -65,7 +63,7 @@ const Login = () => {
     });
     const [alert,setAlert] = useState();
    const {dispatch} = useContext(AuthContext);
-
+   const location = useLocation();
    const classes = useStyles();
 
 
@@ -77,19 +75,23 @@ const Login = () => {
    
    const handleClick =async (e)=>{
     e.preventDefault()
-    
+     if(!credentials.email||!credentials.password){
+      return setAlert("Email amd password is required!")
+     }
+      
     
     try{
       dispatch({type:"LOGIN_START"});
         const res = await axios.post("//localhost:5000/auth/login",credentials)
-        dispatch({type:"LOGIN_SUCCESS",payload:res.data})
-        navigate("/")
         
+        dispatch({type:"LOGIN_SUCCESS",payload:res.data.token})
+        setAlert("")
+        navigate(-1||'/')       
 
     }catch(error){
       setAlert(error.response.data.message)
-      console.log(error)
-        dispatch({type:"LOGIN_FAILURE",payload:error.response.data})
+      
+      
     }
     
    }
@@ -142,7 +144,7 @@ const Login = () => {
             variant="contained"
             color="primary"
             className={classes.submit}
-            onClick={handleClick}
+            onClick={(e)=>handleClick(e)}
           >
             Sign In
           </Button>

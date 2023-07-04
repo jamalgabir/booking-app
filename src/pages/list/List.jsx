@@ -113,7 +113,7 @@ const List = () => {
                 </div>
               </div>
             </div>
-            <button onClick={HandleSearch} >Search</button>
+            <button onClick={()=>HandleSearch()} >Search</button>
           </div>
           <div className="listResult">
             {loading?<div className="list-loading"><IsLoading/></div>:<>{
