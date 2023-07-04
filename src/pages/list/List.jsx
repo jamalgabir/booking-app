@@ -35,7 +35,7 @@ const List = () => {
     refetch()
       
   }
-  console.log(options)
+  
  
   return (
     <div>

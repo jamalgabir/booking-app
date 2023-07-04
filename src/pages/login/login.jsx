@@ -18,6 +18,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import { useNavigate } from 'react-router-dom';
 import Alert from '@mui/material/Alert';
+import Backdrop from '@mui/material/Backdrop';
+import CircularProgress from '@mui/material/CircularProgress';
 
 
 function Copyright() {
@@ -76,8 +78,9 @@ const Login = () => {
    const handleClick =async (e)=>{
     e.preventDefault()
     
-    dispatch({type:"LOGIN_START"});
+    
     try{
+      dispatch({type:"LOGIN_START"});
         const res = await axios.post("//localhost:5000/auth/login",credentials)
         dispatch({type:"LOGIN_SUCCESS",payload:res.data})
         navigate("/")

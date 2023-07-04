@@ -14,7 +14,7 @@ const Navbar = () => {
     <div className="navbar">
       <div className="navContainer">
         <Link style={{textDecoration:"none",color:"inherit"}} to="/">
-        <span className="logo">jamalDev</span>
+        <span className="logo">J.Booking</span>
         </Link>
         
         <div className="navItems">

@@ -152,7 +152,7 @@ const Hotel = () => {
                 excellent location score of 9.8!
               </span>
               <h2>
-                <b>${dates.length?data?.cheapestPrice * daysDiffrences(dates[0]?.endDate,dates[0]?.startDate)*options?.room:0}</b> {options?.room} Rooms and ({dates.length?daysDiffrences(dates[0]?.endDate,dates[0]?.startDate):0} nights )
+                <b>${dates.length?data?.cheapestPrice * daysDiffrences(dates[0]?.endDate,dates[0]?.startDate)*options?.room:0}</b> {options?.room} Rooms for ({dates.length?daysDiffrences(dates[0]?.endDate,dates[0]?.startDate):0} nights )
               </h2>
               <button onClick={handleClick()}>Reserve or Book Now!</button>
             </div>
