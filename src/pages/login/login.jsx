@@ -3,7 +3,7 @@ import axios from 'axios';
 import  { useContext, useState } from 'react';
 import { AuthContext } from '../../context/auothContext';
 import "./login.css";
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -63,7 +63,7 @@ const Login = () => {
     });
     const [alert,setAlert] = useState();
    const {dispatch} = useContext(AuthContext);
-   const location = useLocation();
+   
    const classes = useStyles();
 
 
