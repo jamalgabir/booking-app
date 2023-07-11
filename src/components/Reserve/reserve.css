@@ -1,0 +1,9 @@
+.ritem{
+    border: 1px solid grey;
+    width: 80%;
+    height: 80%;
+}
+.rClose{
+    float: right;
+    cursor: pointer;
+}

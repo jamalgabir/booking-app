@@ -17,12 +17,14 @@ import IsLoading from "../../components/spinner/isloading";
 import { searchContext } from "../../context/searchContext";
 import { AuthContext } from "../../context/auothContext";
 import { useNavigate } from "react-router-dom";
+import Reserve from "../../components/Reserve/Reserve";
 
 const Hotel = () => {
   const id = useLocation().pathname.split("/")[2]
   const navigate = useNavigate();
   const [slideNumber, setSlideNumber] = useState(0);
   const [open, setOpen] = useState(false);
+  const [open1, setOpen1] = useState(false);
   const {data,loading,} = useFetch(`//localhost:5000/hotels/find/${id}`)
 
   const {dates,options} = useContext(searchContext);
@@ -162,6 +164,7 @@ const Hotel = () => {
         </div>
         <MailList />
         <Footer />
+        <Reserve setOpen={open1} data={data}/>
       </div>
     </div>
   );

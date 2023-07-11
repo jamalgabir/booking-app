@@ -89,7 +89,12 @@ const Login = () => {
         navigate(-1||'/')       
 
     }catch(error){
-      setAlert(error.response.data.message)
+      if(error?.response?.data){
+        return setAlert(error?.response?.data?.message)
+      }else{
+        return setAlert("There is server connection problem please try again latter!")
+
+      }
       
       
     }

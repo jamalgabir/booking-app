@@ -64,14 +64,21 @@ export default function SignUp() {
 
   const handleclick = async (e) =>{
     e.preventDefault();
+    if(!user.email||!user.password||!user.username){
+      return setAlert("All input is required!")
+    }
     try{
         const res = await axios.post(`http://localhost:5000/auth/register`,user)
 
-        localStorage.setItem("user",JSON.stringify(res.data._id))
+        localStorage.setItem("t_ken",JSON.stringify(res?.data?._id))
         navigate("/")
     }catch(error){
-        setAlert(error.response.data.message)
-        console.log(error)
+      if(error?.response?.data){
+        return setAlert(error?.response?.data?.message)
+      }else{
+        return setAlert("There is server connection problem please try again latter!")
+
+      }
     }
   }
 
