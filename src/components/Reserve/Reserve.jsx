@@ -13,7 +13,7 @@ const Reserve = ({setOpen,hotelId}) => {
         icon={faCircleXmark}
         className='rClose'
         onClick={()=>setOpen(false)}/>
-        <span>Select your rooms:</span>
+        <span>Select your rooms</span>
         {data.map((item)=>(
           <div className="ritem">
             <div className="rinfo">
