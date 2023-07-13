@@ -25,7 +25,7 @@ const List = () => {
   const {data,loading,refetch} = useFetch(`//localhost:5000/hotels?cities=${destination}&featured=true&min=${min}&max=${max}`)
   const {dispatch} = useContext(searchContext)
  
-
+console.log(data)
   const handleChange = (e) =>{
     setOptions(prev=>({...prev,[e.target.name]: e.target.value}));
   }
@@ -116,8 +116,8 @@ const List = () => {
             <button onClick={()=>HandleSearch()} >Search</button>
           </div>
           <div className="listResult">
-            {loading?<div className="list-loading"><IsLoading/></div>:<>{
-              data.length?data.map(item=>(
+            {loading?<div className="list-loading"><IsLoading open={loading}/></div>:<>{
+              data?.length?data.map(item=>(
                 <SearchItem item={item}  key={item?._id}/>
                 
               )):(<div className="noitem"><div>There Is No Items! {data.length}</div></div>)

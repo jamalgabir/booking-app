@@ -24,7 +24,7 @@ const Hotel = () => {
   const navigate = useNavigate();
   const [slideNumber, setSlideNumber] = useState(0);
   const [open, setOpen] = useState(false);
-  const [open1, setOpen1] = useState(false);
+  const [openmodel, setOpenmodel] = useState(false);
   const {data,loading,} = useFetch(`//localhost:5000/hotels/find/${id}`)
 
   const {dates,options} = useContext(searchContext);
@@ -79,9 +79,10 @@ const Hotel = () => {
     if(!user){
      return navigate("/login")
     }
+    setOpenmodel(true)
   }
   return (
-    <div>
+    <div style={{position:"relative"}}>
       <Navbar />
       <Header type="list" />
       <div className="hotelContainer">
@@ -121,7 +122,7 @@ const Hotel = () => {
             Book a stay over $114 at this property and get a free airport taxi
           </span>
           <div className="hotelImages">
-            {loading?<div className="loading-container"><IsLoading/></div>:photos?.map((item,i) => (
+            {loading?<div className="loading-container"><IsLoading open={loading}/></div>:photos?.map((item,i) => (
               <div className="hotelImgWrapper" key={i}>
                 <img
                   onClick={() => handleOpen(i)}
@@ -164,7 +165,7 @@ const Hotel = () => {
         </div>
         <MailList />
         <Footer />
-        <Reserve setOpen={open1} data={data}/>
+        {openmodel && <Reserve setOpen={setOpenmodel} hotelId={id}/>}
       </div>
     </div>
   );

@@ -1,7 +1,15 @@
+.reserve{
+    position: absolute;
+    border:  1px solid grey;
+    width: 60%;
+    height:60%;
+    background-color: grey;
+    transition: all 1.5s;
+}
+
 .ritem{
     border: 1px solid grey;
-    width: 80%;
-    height: 80%;
+    
 }
 .rClose{
     float: right;

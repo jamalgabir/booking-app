@@ -16,7 +16,7 @@ const PropertyList = () => {
   return (
     <div className="pList">
 
-      {loading?<div className="loading-container"><IsLoading/></div>:(<>{data&&images.map((img,i)=>{
+      {loading?<div className="loading-container"><IsLoading open={loading}/></div>:(<>{data&&images.map((img,i)=>{
         return (
           <div key={i} className="pListItem">
         <img

@@ -5,10 +5,9 @@ import IsLoading from "../spinner/isloading"
 const Featured = () => {
   const {data,loading} = useFetch("http://localhost:5000/hotels/countby?cities=london,hayes,heathrow");
   
-
   return (
     <div className="featured">
-      {loading? <div className="loading-container"><IsLoading/></div> :<><div className="featuredItem">
+      {loading? <div className="loading-container"><IsLoading open={loading}/></div> :<><div className="featuredItem">
         <img
           src="https://cf.bstatic.com/xdata/images/city/max500/957801.webp?k=a969e39bcd40cdcc21786ba92826063e3cb09bf307bcfeac2aa392b838e9b7a5&o="
           alt=""
