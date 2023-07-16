@@ -18,6 +18,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import { useNavigate } from 'react-router-dom';
 import Alert from '@mui/material/Alert';
+import { puplicRequest } from '../../components/RequestUrl';
 
 
 
@@ -82,9 +83,9 @@ const Login = () => {
     
     try{
       dispatch({type:"LOGIN_START"});
-        const res = await axios.post("//localhost:5000/auth/login",credentials)
+        const res = await puplicRequest.post(`/auth/login`,credentials)
         
-        dispatch({type:"LOGIN_SUCCESS",payload:res.data.token})
+        dispatch({type:"LOGIN_SUCCESS",payload:res.data._id})
         setAlert("")
         navigate(-1||'/')       
 

@@ -2,7 +2,7 @@ import "./list.css";
 import Navbar from "../../components/navbar/Navbar";
 import Header from "../../components/header/Header";
 import { useLocation } from "react-router-dom";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { format } from "date-fns";
 import { DateRange } from "react-date-range";
 import SearchItem from "../../components/searchItem/SearchItem";
@@ -22,10 +22,10 @@ const List = () => {
   const [max,setMax] = useState(999);
   // const [data,setData] = useState([DADA?.data])
   // const [loading,setLoading] = useState(DADA?.loading)
-  const {data,loading,refetch} = useFetch(`//localhost:5000/hotels?cities=${destination}&featured=true&min=${min}&max=${max}`)
+  const {data,loading,refetch} = useFetch(`/hotels?cities=${destination}&featured=true&min=${min}&max=${max}`)
   const {dispatch} = useContext(searchContext)
- 
-console.log(data)
+  
+  
   const handleChange = (e) =>{
     setOptions(prev=>({...prev,[e.target.name]: e.target.value}));
   }
@@ -35,9 +35,10 @@ console.log(data)
     refetch()
       
   }
-  
+  console.log(data)
  
   return (
+
     <div>
       <Navbar />
       <Header type="list" />

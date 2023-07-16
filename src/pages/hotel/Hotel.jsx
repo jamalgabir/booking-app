@@ -18,18 +18,21 @@ import { searchContext } from "../../context/searchContext";
 import { AuthContext } from "../../context/auothContext";
 import { useNavigate } from "react-router-dom";
 import Reserve from "../../components/Reserve/Reserve";
+import { userRequest } from "../../components/RequestUrl";
 
 const Hotel = () => {
+
   const id = useLocation().pathname.split("/")[2]
   const navigate = useNavigate();
   const [slideNumber, setSlideNumber] = useState(0);
   const [open, setOpen] = useState(false);
   const [openmodel, setOpenmodel] = useState(false);
-  const {data,loading,} = useFetch(`//localhost:5000/hotels/find/${id}`)
+  const {data,loading,} = useFetch(`/hotels/find/${id}`)
 
   const {dates,options} = useContext(searchContext);
   const {user } = useContext(AuthContext);
   const MILLISECONT_PERDAY = 1000*60*60*24;
+  console.log(dates)
   const daysDiffrences =  (date1,date2)=>{
     const timeDif = Math.abs(date2?.getTime() - date1?.getTime())
     const diffDay = Math.ceil(timeDif/MILLISECONT_PERDAY);

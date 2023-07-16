@@ -1,7 +1,9 @@
 import {useEffect, useState} from "react";
 import axios from "axios";
+import { puplicRequest } from "../components/RequestUrl";
 
 const useFetch = (url) =>{
+
     const [data, setData] = useState([])
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState('')
@@ -11,11 +13,11 @@ const useFetch = (url) =>{
             const fetchdata = async ()=>{
                 setLoading(true)
                 try{
-                    const res = await axios.get(url)
+                    const res = await puplicRequest.get(url)
                     
-                    setData(res.data)
+                    setData(res.data);
+                    setLoading(false);
                 }catch(err){
-                    
                     setError(err)
                 }
                 setLoading(false)
@@ -31,9 +33,10 @@ const useFetch = (url) =>{
     const refetch = async ()=>{
         setLoading(true)
         try{
-            const res = await axios.get(url)
+            const res = await puplicRequest.get(url)
             
             setData(res.data)
+            setLoading(false)
         }catch(err){
             
             setError(err)
