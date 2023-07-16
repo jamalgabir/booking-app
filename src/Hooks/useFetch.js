@@ -1,5 +1,4 @@
 import {useEffect, useState} from "react";
-import axios from "axios";
 import { puplicRequest } from "../components/RequestUrl";
 
 const useFetch = (url) =>{

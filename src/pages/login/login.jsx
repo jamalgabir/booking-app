@@ -85,7 +85,7 @@ const Login = () => {
       dispatch({type:"LOGIN_START"});
         const res = await puplicRequest.post(`/auth/login`,credentials)
         
-        dispatch({type:"LOGIN_SUCCESS",payload:res.data._id})
+        dispatch({type:"LOGIN_SUCCESS",payload:res.data.others._id})
         setAlert("")
         navigate(-1||'/')       
 
