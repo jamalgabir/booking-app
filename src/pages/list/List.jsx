@@ -35,7 +35,6 @@ const List = () => {
     refetch()
       
   }
-  console.log(data)
  
   return (
 

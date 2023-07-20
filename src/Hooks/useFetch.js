@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react";
-import { puplicRequest } from "../components/RequestUrl";
+import { puplicRequest ,userRequest} from "../components/RequestUrl";
 
 const useFetch = (url) =>{
 
@@ -17,6 +17,7 @@ const useFetch = (url) =>{
                     setData(res.data);
                     setLoading(false);
                 }catch(err){
+                    console.log(err)
                     setError(err)
                 }
                 setLoading(false)
