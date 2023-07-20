@@ -1,4 +1,3 @@
-import axios from 'axios';
 
 import  { useContext, useState } from 'react';
 import { AuthContext } from '../../context/auothContext';
@@ -85,7 +84,7 @@ const Login = () => {
       dispatch({type:"LOGIN_START"});
         const res = await puplicRequest.post(`/auth/login`,credentials)
         
-        dispatch({type:"LOGIN_SUCCESS",payload:res.data.others._id})
+        dispatch({type:"LOGIN_SUCCESS",payload:res.data.token})
         setAlert("")
         navigate(-1||'/')       
 
