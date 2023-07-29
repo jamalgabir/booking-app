@@ -31,7 +31,8 @@ const List = () => {
   }
   const HandleSearch =()=>{
 
-    dispatch({type:"NEW_SEARCH",payload:{destination,options,dates:date}})
+    dispatch({type:"NEW_SEARCH",payload:{destination:destination,options:options,dates:date}})
+    
     refetch()
       
   }

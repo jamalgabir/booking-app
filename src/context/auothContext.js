@@ -1,7 +1,7 @@
 import { createContext, useEffect, useReducer } from "react";
 
 const INTAIL_STATE = {
-    user: JSON?.parse(localStorage?.getItem("t_ken"))||null,
+    user: JSON.parse(localStorage.getItem("user"))||null,
     loading: false,
     error: null
 };
@@ -41,11 +41,20 @@ const AuthReducer = (state,action)=>{
 
 };
 
+
+
 export const AuthContextProvider = ({children}) =>{
     const [state,dispatch] = useReducer(AuthReducer,INTAIL_STATE);
+
     useEffect(()=>{
-        localStorage.setItem("t_ken",JSON.stringify(state?.user))
-    },[state.user])
+        const stateInfo = JSON.stringify(state?.user?.token);
+        const info = JSON.stringify(state?.user?.others?._id);
+        if(stateInfo){
+            localStorage.setItem("user",info)
+            localStorage.setItem("t_ken",stateInfo)
+        }
+        
+    },[state?.user])
 
     return(
         <AuthContext.Provider value={{

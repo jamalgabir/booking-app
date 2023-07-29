@@ -1,8 +1,8 @@
 .reserve{
     position: absolute;
     border:  1px solid grey;
-    width: 60%;
-    height:60%;
+    width: 40%;
+    height:30%;
     background-color: grey;
     transition: all 1.5s;
 }

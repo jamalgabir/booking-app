@@ -1,8 +1,9 @@
 import {useEffect, useState} from "react";
-import { puplicRequest ,userRequest} from "../components/RequestUrl";
+import { puplicRequest } from "../components/RequestUrl";
+import { useNavigate } from "react-router-dom";
 
 const useFetch = (url) =>{
-
+    const navigate = useNavigate();
     const [data, setData] = useState([])
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState('')
@@ -17,7 +18,9 @@ const useFetch = (url) =>{
                     setData(res.data);
                     setLoading(false);
                 }catch(err){
-                    console.log(err)
+                    setLoading(false)
+                    
+                    console.log(err.response.data.message)
                     setError(err)
                 }
                 setLoading(false)
@@ -29,7 +32,7 @@ const useFetch = (url) =>{
             
     
 
-    },[url]);
+    },[url,navigate]);
     const refetch = async ()=>{
         setLoading(true)
         try{
@@ -38,7 +41,7 @@ const useFetch = (url) =>{
             setData(res.data)
             setLoading(false)
         }catch(err){
-            
+            setLoading(false)
             setError(err)
         }
         setLoading(false)

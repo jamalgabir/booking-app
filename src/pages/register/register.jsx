@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -14,6 +14,7 @@ import Container from '@material-ui/core/Container';
 import axios from 'axios';
 import { useNavigate,Link} from 'react-router-dom';
 import Alert from '@mui/material/Alert';
+import { AuthContext } from '../../context/auothContext';
 
 function Copyright() {
   return (
@@ -50,6 +51,7 @@ const useStyles = makeStyles((theme) => ({
 
 
 export default function SignUp() {
+  const {dispatch} = useContext(AuthContext);
   const [user,setUser] = useState({
     username: undefined,
     email: undefined,
@@ -67,9 +69,11 @@ export default function SignUp() {
     if(!user.email||!user.password||!user.username){
       return setAlert("All input is required!")
     }
-    try{
-        const res = await axios.post(`http://localhost:5000/auth/register`,user)
 
+    try{
+      dispatch({type:"LOGIN_START"})
+        const res = await axios.post(`http://localhost:5000/auth/register`,user)
+        dispatch({type:"LOGIN_SUCCESS",payload:res.data})
         localStorage.setItem("t_ken",JSON.stringify(res?.data?._id))
         navigate("/")
     }catch(error){
