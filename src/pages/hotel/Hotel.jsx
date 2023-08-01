@@ -25,6 +25,7 @@ const Hotel = () => {
   const navigate = useNavigate();
   const [slideNumber, setSlideNumber] = useState(0);
   const [open, setOpen] = useState(false);
+  const [btn, setBtn] = useState(false);
   const [openmodel, setOpenmodel] = useState(false);
   const {data,loading} = useFetch(`/hotels/find/${id}`)
 
@@ -77,11 +78,14 @@ const Hotel = () => {
     setSlideNumber(newSlideNumber)
   };
   const HandleClick = () =>{
-    
+    window.scrollTo({top: 0 , behavior: "smooth"});
     if(!user){
      return navigate("/login")
     }
-    setOpenmodel(true)
+        
+    setOpenmodel(true);
+    setBtn(true);
+    
   }
   return (
     <div style={{position:"relative"}}>
@@ -111,7 +115,7 @@ const Hotel = () => {
           </div>
         )}
         <div className="hotelWrapper">
-          <button onClick={()=>HandleClick()} className="bookNow">Reserve or Book Now!</button>
+          <button disabled={btn} onClick={()=>HandleClick()} className="bookNow">Reserve or Book Now!</button>
           <h1 className="hotelTitle">Tower Street Apartments</h1>
           <div className="hotelAddress">
             <FontAwesomeIcon icon={faLocationDot} />
@@ -161,13 +165,13 @@ const Hotel = () => {
               <h2>
                 <b>${dates.length?data?.cheapestPrice * daysDiffrences(dates[0]?.endDate,dates[0]?.startDate)*options?.room:0}</b> {options?.room} Rooms for ({dates.length?daysDiffrences(dates[0]?.endDate,dates[0]?.startDate):0} nights )
               </h2>
-              <button onClick={()=>HandleClick()}>Reserve or Book Now!</button>
+              <button disabled={btn} onClick={()=>HandleClick()}>Reserve or Book Now!</button>
             </div>
           </div>
         </div>
         <MailList />
         <Footer />
-        {openmodel && <Reserve setOpen={setOpenmodel} hotelId={id}/>}
+        {openmodel && <Reserve setOpen={setOpenmodel} setBtn={setBtn} hotelId={id}/>}
       </div>
     </div>
   );
