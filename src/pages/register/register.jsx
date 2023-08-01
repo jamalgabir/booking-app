@@ -15,6 +15,7 @@ import axios from 'axios';
 import { useNavigate,Link} from 'react-router-dom';
 import Alert from '@mui/material/Alert';
 import { AuthContext } from '../../context/auothContext';
+import { puplicRequest } from '../../components/RequestUrl';
 
 function Copyright() {
   return (
@@ -72,7 +73,7 @@ export default function SignUp() {
 
     try{
       dispatch({type:"LOGIN_START"})
-        const res = await axios.post(`http://localhost:5000/auth/register`,user)
+        const res = await puplicRequest.post(`/auth/register`,user)
         dispatch({type:"LOGIN_SUCCESS",payload:res.data})
         localStorage.setItem("t_ken",JSON.stringify(res?.data?._id))
         navigate("/")
