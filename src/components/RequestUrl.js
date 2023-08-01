@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BASE_URL = "http://localhost:5000/";
+const BASE_URL = "https://booking-api-1016.onrender.com/";
 const token = JSON.parse(localStorage.getItem("t_ken"));
 export const puplicRequest = axios.create({
     baseURL:BASE_URL,
