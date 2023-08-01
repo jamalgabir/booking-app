@@ -67,7 +67,7 @@ export default function SignUp() {
   const handleclick = async (e) =>{
     e.preventDefault();
     if(!user.email||!user.password||!user.username){
-      return setAlert("All input is required!")
+      return setAlert("All inputs is required!")
     }
 
     try{
