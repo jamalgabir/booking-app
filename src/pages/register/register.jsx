@@ -29,6 +29,7 @@ function Copyright() {
   );
 }
 
+
 const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(8),
@@ -94,7 +95,7 @@ export default function SignUp() {
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Sign up
+          Sign up 
         </Typography>
         <form className={classes.form} noValidate>
           <Grid container spacing={2}>

@@ -27,11 +27,12 @@ const Hotel = () => {
   const [open, setOpen] = useState(false);
   const [btn, setBtn] = useState(false);
   const [openmodel, setOpenmodel] = useState(false);
-  const {data,loading} = useFetch(`/hotels/find/${id}`)
-
+  const {data,refetch,loading} = useFetch(`/hotels/find/${id}`)
   const {dates,options} = useContext(searchContext);
-  const {user } = useContext(AuthContext);
+  const {user,dispatch } = useContext(AuthContext);
   const MILLISECONT_PERDAY = 1000*60*60*24;
+
+  const {error} = useFetch(`/rooms/${id}`);
 
   const daysDiffrences =  (date1,date2)=>{
     const timeDif = Math.abs(date2?.getTime() - date1?.getTime())
@@ -77,16 +78,21 @@ const Hotel = () => {
 
     setSlideNumber(newSlideNumber)
   };
+  
   const HandleClick = () =>{
-    window.scrollTo({top: 0 , behavior: "smooth"});
-    if(!user){
-     return navigate("/login")
+   
+    
+    if(!user||error === "The token is not valid!"){
+      localStorage.clear();
+      dispatch({type:"LOG_OUT"})
+      navigate("/login")
     }
         
     setOpenmodel(true);
     setBtn(true);
     
   }
+  
   return (
     <div style={{position:"relative"}}>
       <Navbar />

@@ -3,7 +3,7 @@
     border:  1px solid grey;
     width: 40%;
     height:30%;
-    background-color: grey;
+    background-color: rgb(243, 223, 223);
     transition: all 1.5s;
 }
 
@@ -14,4 +14,7 @@
 .rClose{
     float: right;
     cursor: pointer;
+}
+.rcontainer{
+    
 }

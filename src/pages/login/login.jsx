@@ -86,13 +86,14 @@ const Login = () => {
         
         dispatch({type:"LOGIN_SUCCESS",payload:res.data})
         setAlert("")
-        navigate(-1||'/')       
+        navigate(-1||'/');
+               
 
     }catch(error){
       if(error?.response?.data){
         return setAlert(error?.response?.data?.message)
       }else{
-        return setAlert("There is server connection problem please try again latter!")
+        return setAlert("There is a server connection problem please try again latter!")
 
       }
       
