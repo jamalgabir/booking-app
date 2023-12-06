@@ -86,7 +86,7 @@ const Login = () => {
         
         dispatch({type:"LOGIN_SUCCESS",payload:res.data})
         setAlert("")
-        navigate(-1||'/');
+        navigate('/');
                
 
     }catch(error){
