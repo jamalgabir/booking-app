@@ -9,7 +9,7 @@ const CreatPassword = () => {
     const [email, setEmail]= useState({});
     const [alart, setAlart] = useState('');
     const [success, setSuccess] = useState('');
-    const id = useLocation().pathname("/")[3];
+    const id = useLocation().pathname.split("/")[2];
     console.log(id)
     const onchange = (e)=>{
         return setEmail(pre=>({...pre,[e.target.name]:e.target.value}))
