@@ -23,11 +23,11 @@ const CreatPassword = () => {
       if(!email){
         return setAlart("Please enter your password!")
       }
-      await puplicRequest.post(`/auth/reset-password/${id}`,email);
+      const user =await puplicRequest.post(`/auth/reset-password/${id}`,email);
       setSuccess("Password Saved Successful Please wait...");
       setTimeout(() =>navigate("/login"),5000)
     }catch(error){
-      setAlart("Something Wrong Please try again later !")
+      setAlart(error.response.message)
       setTimeout(()=>setAlart(""),5000)
       console.log(error)
     }
