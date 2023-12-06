@@ -2,13 +2,15 @@ import React, { useState } from 'react'
 import "./resetPassword.css";
 import { puplicRequest } from '../../components/RequestUrl';
 import { Alert } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const CreatPassword = () => {
   const navigate = useNavigate();
     const [email, setEmail]= useState({});
     const [alart, setAlart] = useState('');
     const [success, setSuccess] = useState('');
+    const id = useLocation().pathname("/")[3];
+    console.log(id)
     const onchange = (e)=>{
         return setEmail(pre=>({...pre,[e.target.name]:e.target.value}))
         
