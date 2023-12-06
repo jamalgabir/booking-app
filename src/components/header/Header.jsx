@@ -15,10 +15,15 @@ import "react-date-range/dist/theme/default.css"; // theme css file
 import { format } from "date-fns";
 import { useNavigate } from "react-router-dom";
 import { searchContext } from "../../context/searchContext";
+import {  Snackbar } from "@mui/material";
+import Box from '@mui/material/Box';
 
 const Header = ({ type }) => {
   const [destination, setDestination] = useState("");
+  const [alert, setAlert] = useState("Hello");
   const [openDate, setOpenDate] = useState(false);
+  
+  
   const [date, setDate] = useState([
     {
       startDate: new Date(),
@@ -26,6 +31,7 @@ const Header = ({ type }) => {
       key: "selection",
     },
   ]);
+  
   const [openOptions, setOpenOptions] = useState(false);
   const [options, setOptions] = useState({
     adult: 1,
@@ -45,14 +51,28 @@ const Header = ({ type }) => {
   };
   const {dispatch} = useContext(searchContext);
 
-  const handleSearch = () => {
+  const handleSearch =async () => {
+    try{
+      const start = new Date(date[0]?.startDate)
+      const end = new Date(date[0]?.endDate)
+    if(start===end){
+      return setAlert("Please choose the days");
+    }
     dispatch({type:"NEW_SEARCH",payload:{destination,dates:date,options}})
-    navigate("/hotels", { state: { destination, dates:date, options } });
+    navigate("/hotels",{ state: { destination, dates:date, options } });
+
+    }catch(error){
+      console.log(error)
+
+    }
+    
+    
     
   };
 
   return (
     <div className="header">
+      
       <div
         className={
           type === "list" ? "headerContainer listMode" : "headerContainer"
@@ -115,6 +135,7 @@ const Header = ({ type }) => {
                     onChange={(item) => setDate([item.selection])}
                     moveRangeOnFirstSelection={false}
                     ranges={date}
+                    
                     className="date"
                     minDate={new Date()}
                   />

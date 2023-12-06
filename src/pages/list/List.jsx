@@ -22,7 +22,7 @@ const List = () => {
   const [max,setMax] = useState(999);
   // const [data,setData] = useState([DADA?.data])
   // const [loading,setLoading] = useState(DADA?.loading)
-  const {data,loading,refetch} = useFetch(`/hotels?cities=${destination}&featured=true&min=${min}&max=${max}`)
+  const {data,loading} = useFetch(`/hotels?cities=${destination}&featured=true&min=${min}&max=${max}`)
   const {dispatch} = useContext(searchContext)
   
   
@@ -33,7 +33,7 @@ const List = () => {
 
     dispatch({type:"NEW_SEARCH",payload:{destination:destination,options:options,dates:date}})
     
-    refetch()
+    //refetch()
       
   }
  
@@ -114,12 +114,12 @@ const List = () => {
                 </div>
               </div>
             </div>
-            <button onClick={()=>HandleSearch()} >Search</button>
+            <button onClick={HandleSearch} >Search</button>
           </div>
           <div className="listResult">
             {loading?<div className="list-loading"><IsLoading open={loading}/></div>:<>{
               data?.length?data.map(item=>(
-                <SearchItem item={item}  key={item?._id}/>
+                <SearchItem item={item}   key={item?._id}/>
                 
               )):(<div className="noitem"><div>There Is No Items! {data.length}</div></div>)
             }</>}

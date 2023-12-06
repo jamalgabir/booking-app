@@ -1,10 +1,10 @@
 import useFetch from "../../Hooks/useFetch";
 import "./featured.css";
 import IsLoading from "../spinner/isloading"
-
+import { puplicRequest } from "../RequestUrl";
 const Featured = () => {
 
-  const {data,loading} = useFetch("http://localhost:5000/hotels/countby?cities=london,hayes,heathrow");
+  const {data,loading} = useFetch(`${puplicRequest}/hotels/countby?cities=london,hayes,heathrow`);
   
   return (
     <div className="featured">

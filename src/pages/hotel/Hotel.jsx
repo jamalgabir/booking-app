@@ -81,7 +81,7 @@ const Hotel = () => {
   
   const HandleClick = () =>{
    
-    
+    refetch()
     if(!user||error === "The token is not valid!"){
       localStorage.clear();
       dispatch({type:"LOG_OUT"})
@@ -163,7 +163,7 @@ const Hotel = () => {
               </p>
             </div>
             <div className="hotelDetailsPrice">
-              <h1>{dates.length?`Perfect for a ${daysDiffrences(dates[0]?.endDate,dates[0]?.startDate)}-night stay!`:"Please select dayes"}</h1>
+              <h1>{dates.length?`Perfect for a ${daysDiffrences(dates[0]?.endDate,dates[0]?.startDate)}-night stay!`:"Please choose the  days"}</h1>
               <span>
                 Located in the real heart of Krakow, this property has an
                 excellent location score of 9.8!

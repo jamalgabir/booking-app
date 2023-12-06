@@ -8,9 +8,9 @@ import { searchContext } from "../../context/searchContext";
 
 const Reserve = ({setOpen,hotelId,setBtn}) => {
     const [selectedRoom, setSelectedRoom] = useState([]);
-    const {data, loading} = useFetch(`/rooms/${hotelId}`);
+    const {data, loading,error} = useFetch(`/rooms/${hotelId}`);
     const {dates} = useContext(searchContext);
-
+    console.log(error)
     const getDateInRang = (start,end) =>{
 
       const date = new Date(start?.getTime());

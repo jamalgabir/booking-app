@@ -1,8 +1,13 @@
+import { useContext } from "react";
+import { searchContext } from "../../context/searchContext";
 import "./searchItem.css";
 import {Link }from "react-router-dom";
 
 const SearchItem = ({item}) => {
+  
+ // const {dispatch} = useContext(searchContext);
 
+  
   return (
     <div className="searchItem">
       <img
@@ -34,10 +39,10 @@ const SearchItem = ({item}) => {
         <div className="siDetailTexts">
           <span className="siPrice">${item?.cheapestPrice}</span>
           <span className="siTaxOp">Includes taxes and fees</span>
-          <Link to={`/hotels/${item?._id}`}>
+          <Link to={`${item?._id}`}>
             <button className="siCheckButton">See availability</button>
           </Link>
-          
+            
         </div>
       </div>
     </div>

@@ -1,10 +1,10 @@
 import "./propertyList.css";
 import useFetch from "../../Hooks/useFetch";
 import IsLoading from "../spinner/isloading";
-
+import { puplicRequest } from "../RequestUrl";
 
 const PropertyList = () => {
-  const {data,loading} = useFetch("http://localhost:5000/hotels/countbytype");
+  const {data,loading} = useFetch(puplicRequest);
 
   const images = ([
     "https://cf.bstatic.com/xdata/images/xphoto/square300/57584488.webp?k=bf724e4e9b9b75480bbe7fc675460a089ba6414fe4693b83ea3fdd8e938832a6&o=",
