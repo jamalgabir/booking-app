@@ -10,7 +10,7 @@ const CreatPassword = () => {
     const [alart, setAlart] = useState('');
     const [success, setSuccess] = useState('');
     const id = useLocation().pathname.split("/")[2];
-    console.log(id)
+    
     const onchange = (e)=>{
         return setEmail(pre=>({...pre,[e.target.name]:e.target.value}))
         
@@ -23,7 +23,7 @@ const CreatPassword = () => {
       if(!email){
         return setAlart("Please enter your password!")
       }
-      const user =await puplicRequest.post(`/auth/reset-password/${id}`,email);
+      await puplicRequest.post(`/auth/reset-password/${id}`,email);
       setSuccess("Password Saved Successful Please wait...");
       setTimeout(() =>navigate("/login"),5000)
     }catch(error){

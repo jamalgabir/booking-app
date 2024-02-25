@@ -8,7 +8,7 @@ const ForgotPassword = () => {
     const [alart, setAlart] = useState('');
     const [success, setSuccess] = useState('');
     const onchange = (e)=>{
-        return setEmail(pre=>({...pre,[e.target.name]:e.target.value}))
+      return setEmail(pre=>({...pre,[e.target.name]:e.target.value}))
         
     }
     const handleClick =async (e)=>{
